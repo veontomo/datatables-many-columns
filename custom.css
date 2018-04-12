@@ -1,0 +1,33 @@
+.sorting_1, .sorting_asc, .sorting_desc {
+    background-color: #E0E0E0;
+}
+
+.col-2 {
+    width: 40px;
+}
+
+.container {
+    width: 100%;
+    float: left;
+}
+
+.menu {
+    width: 100px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.content {
+    width: 900px;
+    display: inline-block;
+}
+
+
+#myTable {
+    margin: 0 auto;
+    table-layout: fixed;
+    width: 900px;
+}
+table td {
+	overflow: hidden;
+}

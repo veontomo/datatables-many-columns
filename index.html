@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DataTables</title>
+    <link rel="stylesheet" type="text/css" href="jquery.DataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="custom.css">
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="jquery.dataTables.min.js"></script>
+    <script src="dataTables.buttons.min.js"></script>
+    <script src="buttons.flash.min.js"></script>
+    <script src="jszip.min.js"></script>
+    <script src="vfs_fonts.js"></script>
+    <script src="buttons.html5.min.js"></script>
+    <script src="faker.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="menu">Menu</div>
+        <div class="content">
+            <table id="myTable"></table>
+        </div>
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var data = [];
+        for (var i = 0; i < 30; i++) {
+            var row = [];
+            for (var k = 15; k >= 0; k--) {
+                var random = (Math.floor(Math.random() * 200) % 6);
+                switch (random) {
+                    case 0:
+                        row.push(faker.hacker.abbreviation());
+                        break;
+                    case 1:
+                        row.push(faker.address.city());
+                        break;
+                    case 2:
+                        row.push(faker.finance.accountName());
+                        break;
+                    case 3:
+                        row.push(faker.finance.amount());
+                        break;
+                    case 4:
+                        row.push(faker.random.words());
+                        break;
+                    case 5:
+                        row.push("");
+
+
+                }
+                row.push(faker.lorem.word() + faker.lorem.word());
+            }
+            data.push(row);
+        }
+        var table = document.getElementById('myTable');
+        var tableHead = document.createElement('thead');
+        var headRow = document.createElement('tr');
+        table.appendChild(tableHead);
+        tableHead.appendChild(headRow);
+        for (var i = 15; i >= 0; i--) {
+            var elem = document.createElement('th');
+            elem.innerHTML = faker.database.column(i);
+            headRow.appendChild(elem);
+        }
+
+        $('#myTable').DataTable({
+            data: data,
+            scrollX: 200,
+            columnDefs: [{
+                targets: '_all',
+                className: 'col-2',
+                render: function(data, type, row) {
+                    if (type === 'display') {
+                        return '<div title="' + data + '">' + data + '</div>';
+                    }
+                    return data;
+                }
+            }],
+            dom: 'Bfrtip',
+            buttons: [
+                'excel'
+            ]
+
+        });
+    });
+    </script>
+</body>
+
+</html>
